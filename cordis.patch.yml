@@ -3,4 +3,4 @@
 # field); installed via the profile package.json dependencies + dsh.profile.bundles.
 - insert:
     - id: compact-relay
-      name: 'dsh-compact-relay'
+      name: 'dsh-compact-relay-local'
