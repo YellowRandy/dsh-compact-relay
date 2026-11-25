@@ -15,7 +15,7 @@
 ## 本 fork 的改动（相对 0.5.8）
 
 1. `lib/client/05-float.js`（新增）：`popupContainingBox(el)` —— 找出会建立 containing block 的最近祖先，返回其视口矩形。
-2. `lib/client/30-indicator.js`：锚点记下容器矩形；`floatPos()` 在视口坐标上减去容器偏移。
+2. `lib/client/30-indicator.js`：锚点记下容器矩形；`floatPos()` 在视口坐标上减去容器偏移；悬停卡改为渲染后**实测宽高**再定位（原来写死估 140px，内容多时判错上下方位、滚动来回跳）。
 3. `lib/client/35-relay-bar.js`：同上（接力菜单的 `top` / `bottom` 两条分支都换算）。
 4. 包名与客户端模块 id 改为 `dsh-compact-relay-local`（行 id 仍是 `compact-relay`，设置沿用）。
 
