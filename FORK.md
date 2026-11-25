@@ -54,3 +54,17 @@ node scripts/build-client.mjs && node test/smoke.mjs
 
 仓库未设 `.gitattributes`，clone 时 `core.autocrlf=true` 会把源码换成 CRLF，
 `scripts/build-client.mjs --check` 因此误报「产物不是最新」。本目录已加 `.gitattributes` 固定 LF。
+
+## 回滚与恢复（2026-11-25 实测）
+
+`~/.dsh/plugin-baseline/rollback.ps1 -Snapshot <名> -DryRun` 只恢复 **8 个配置文件**
+（`package.json`、`pnpm-lock.yaml`、`pnpm-workspace.yaml`、`cordis.yml`、`cordis.patch.yml`、
+`.dsh-market/*`），**不处理 `node_modules` 里的 junction**。所以：
+
+- 回退到 fork 之前的快照（如 `20261125-192448-good-compaction-default`）：插件行消失、插件不再加载，
+  但链接残留，需要时按下面步骤重装即可；
+- 回到 fork 版本：**插件 → 添加插件 → 选本目录** → 完全退出 DSH 再打开 → `doctor.ps1` 全 PASS → 拍 `good-`；
+- 想彻底放弃 fork：卸载本包 → 装官方 `dsh-compact-relay`（行 id 相同，设置沿用）。
+
+远端备份：本分支已推到 fork 的 `local-fork` 分支（`YellowRandy/dsh-compact-relay`），
+工作区目录若丢失可从这里 clone 回来。
