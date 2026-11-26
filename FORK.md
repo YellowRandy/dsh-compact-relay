@@ -69,3 +69,10 @@ node scripts/build-client.mjs && node test/smoke.mjs
 
 远端备份：本分支已推到 fork 的 `local-fork` 分支（`YellowRandy/dsh-compact-relay`），
 工作区目录若丢失可从这里 clone 回来。
+
+## 2026-11-26 追加：与宿主上下文环合并
+
+- 隐藏宿主 `ContextMeter`（aria-label 选择器），把插件环覆盖到它的位置，右侧显示百分比；
+- 菜单新增「上下文构成」（估算：系统提示词 / 工具定义 / 对话消息）；
+- 所有浮层改用 `createPortal` 挂到 `body`（宿主暴露 `react-dom`），彻底摆脱 composer 的 containing block 与滚动条；
+- 跟随侧边栏布局动画：`ResizeObserver` + rAF 逐帧采样 320ms，**不要加 CSS transition**（宿主布局本身就是过渡，叠加会显得延迟）。
